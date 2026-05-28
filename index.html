@@ -4,19 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Canto Livre</title>
-  <meta name="description" content="Contador de cantos para torneio de aves">
+  <meta name="description" content="Contador de cantos para torneio de aves — v3">
   <meta name="theme-color" content="#1a3a2a">
-
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Canto Livre">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Inter:wght@400;500&family=Barlow+Condensed:wght@700&family=Oswald:wght@700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -62,11 +59,9 @@
       flex-direction: column;
     }
 
-    /* ── SCREENS ── */
-    .screen { display: none; flex-direction: column; flex: 1; padding: 20px 16px 32px; }
+    .screen { display: none; flex-direction: column; flex: 1; padding: 20px 16px 24px; }
     .screen.active { display: flex; }
 
-    /* ── HEADER ── */
     .app-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 16px 0;
@@ -74,8 +69,7 @@
     .app-logo {
       font-family: var(--font-display);
       font-size: 20px; font-weight: 800;
-      color: var(--green-light);
-      letter-spacing: -0.5px;
+      color: var(--green-light); letter-spacing: -0.5px;
     }
     .app-logo span { color: var(--cream); }
     .header-btn {
@@ -86,21 +80,16 @@
     }
     .header-btn:active { opacity: 0.7; }
 
-    /* ── CARDS ── */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-lg);
-      padding: 18px;
-      margin-bottom: 12px;
+      padding: 18px; margin-bottom: 12px;
     }
-
-    /* ── TYPOGRAPHY ── */
     .screen-title {
       font-family: var(--font-display);
       font-size: 22px; font-weight: 700;
-      color: var(--cream);
-      margin-bottom: 16px;
+      color: var(--cream); margin-bottom: 16px;
     }
     .label {
       font-size: 11px; font-weight: 500;
@@ -109,7 +98,6 @@
       margin-bottom: 6px;
     }
 
-    /* ── FORM ELEMENTS ── */
     input, select {
       width: 100%; padding: 11px 14px;
       background: rgba(255,255,255,0.07);
@@ -117,15 +105,13 @@
       border-radius: var(--radius-sm);
       color: var(--cream);
       font-family: var(--font-body); font-size: 15px;
-      margin-bottom: 14px;
-      outline: none;
+      margin-bottom: 14px; outline: none;
       -webkit-appearance: none;
     }
     input::placeholder { color: var(--text-muted); }
     input:focus, select:focus { border-color: var(--green-accent); background: rgba(255,255,255,0.10); }
     select option { background: var(--green-dark); color: var(--cream); }
 
-    /* Autocomplete dropdown */
     .sugestoes {
       background: var(--green-dark);
       border: 1px solid var(--green-accent);
@@ -142,7 +128,6 @@
     .sug-item:last-child { border-bottom: none; }
     .sug-item:active { background: rgba(255,255,255,0.08); }
 
-    /* ── PERIOD SELECTOR ── */
     .periodo-opts {
       display: grid; grid-template-columns: 1fr 1fr 1fr;
       gap: 8px; margin-bottom: 4px;
@@ -155,60 +140,42 @@
       text-align: center; cursor: pointer;
       transition: all 0.15s;
     }
-    .periodo-opt .opt-main {
-      font-family: var(--font-display);
-      font-size: 14px; font-weight: 700;
-      color: var(--text-muted);
-    }
-    .periodo-opt .opt-sub {
-      font-size: 10px; color: var(--text-muted);
-      margin-top: 3px; opacity: 0.7;
-    }
-    .periodo-opt.selected {
-      background: var(--green-mid);
-      border-color: var(--green-accent);
-    }
+    .periodo-opt .opt-main { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text-muted); }
+    .periodo-opt .opt-sub  { font-size: 10px; color: var(--text-muted); margin-top: 3px; opacity: 0.7; }
+    .periodo-opt.selected  { background: var(--green-mid); border-color: var(--green-accent); }
     .periodo-opt.selected .opt-main { color: var(--green-pale); }
-    .periodo-opt.selected .opt-sub { color: var(--green-light); opacity: 1; }
+    .periodo-opt.selected .opt-sub  { color: var(--green-light); opacity: 1; }
     .periodo-opt:active { transform: scale(0.97); }
 
-    /* ── BUTTONS ── */
     .btn {
-      padding: 13px 16px;
+      padding: 16px 16px;
       border-radius: var(--radius-md);
       font-family: var(--font-display);
-      font-size: 14px; font-weight: 700;
+      font-size: 15px; font-weight: 700;
       cursor: pointer; text-align: center;
       transition: transform 0.1s, opacity 0.1s;
       border: none; width: 100%;
     }
     .btn:active { transform: scale(0.98); opacity: 0.88; }
-    .btn-primary {
-      background: var(--green-accent);
-      color: var(--white);
-    }
-    .btn-secondary {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-    }
-    .btn-danger {
-      background: rgba(217,79,61,0.15);
-      border: 1px solid rgba(217,79,61,0.35);
-      color: #e87060;
-    }
-    .btn-whatsapp {
-      background: #1faf38;
-      color: var(--white);
-    }
-    .btn-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 10px; margin-bottom: 10px;
-    }
+    .btn-primary  { background: var(--green-accent); color: var(--white); }
+    .btn-secondary { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-muted); }
+    .btn-danger   { background: rgba(217,79,61,0.15); border: 1px solid rgba(217,79,61,0.35); color: #e87060; }
+    .btn-whatsapp { background: #1faf38; color: var(--white); }
+    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
     .btn-full { grid-column: 1 / -1; }
     .btn + .btn { margin-top: 10px; }
 
-    /* ── TIMER SCREEN ── */
+    /* ── TIMER SCREEN LAYOUT ── */
+    #screen-conta {
+      padding-bottom: 16px;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+    .conta-top { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+    .conta-bottom {
+      padding: 12px 0 0;
+    }
+
     .timer-badge {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--green-mid);
@@ -217,10 +184,7 @@
       font-size: 12px; font-weight: 500; color: var(--green-pale);
       margin-bottom: 14px;
     }
-    .timer-badge-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--green-light);
-    }
+    .timer-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-light); }
     .timer-badge-dot.running { animation: pulse 1s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
@@ -228,148 +192,170 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-lg);
-      padding: 24px 18px 18px;
+      padding: 14px 18px 12px;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .ave-label {
-      font-size: 12px; color: var(--text-muted);
-      margin-bottom: 6px; text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-    .ave-name-display {
-      font-family: var(--font-display);
-      font-size: 18px; font-weight: 700;
-      color: var(--cream); margin-bottom: 16px;
-    }
+    .ave-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+    .ave-name-display { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--cream); margin-bottom: 12px; }
     .timer-display {
-      font-family: var(--font-display);
-      font-size: 64px; font-weight: 800;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 64px; font-weight: 700;
       color: var(--cream);
-      letter-spacing: -2px;
-      line-height: 1;
+      letter-spacing: 2px; line-height: 1;
       font-variant-numeric: tabular-nums;
       transition: color 0.3s;
     }
     .timer-display.warning { color: var(--amber); }
     .timer-display.danger  { color: var(--red); }
-    .timer-status {
-      font-size: 12px; color: var(--text-muted);
-      margin-top: 8px; min-height: 18px;
-    }
+    .timer-status { font-size: 12px; color: var(--text-muted); margin-top: 6px; min-height: 16px; }
 
     /* ── CANTO BUTTON ── */
     .canto-btn {
-      width: 100%;
+      width: 100%; flex: 1;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-lg);
-      padding: 20px;
-      cursor: pointer;
-      text-align: center;
-      margin-bottom: 12px;
-      transition: background 0.1s, transform 0.1s, border-color 0.1s;
+      padding: 16px;
+      cursor: pointer; text-align: center;
+      margin-bottom: 10px;
+      transition: background 0.1s, transform 0.08s, border-color 0.1s;
       display: flex; flex-direction: column;
-      align-items: center; gap: 4px;
+      align-items: center; justify-content: center; gap: 4px;
+      position: relative; overflow: hidden;
+      min-height: 0;
+      max-height: none;
+      flex: 1;
     }
-    .canto-btn:not(.disabled):active {
-      transform: scale(0.97);
-      background: rgba(106,191,138,0.12);
-      border-color: var(--green-accent);
-    }
+    .canto-btn:not(.disabled):active { transform: scale(0.97); background: rgba(106,191,138,0.12); border-color: var(--green-accent); }
     .canto-btn.disabled { opacity: 0.35; cursor: not-allowed; }
-    .canto-btn.flash {
-      background: rgba(106,191,138,0.18);
-      border-color: var(--green-light);
-    }
-    .canto-sub { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+    .canto-btn.flash { background: rgba(106,191,138,0.18); border-color: var(--green-light); }
+    .canto-sub { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; position: relative; z-index: 2; }
     .canto-num {
       font-family: var(--font-display);
-      font-size: 48px; font-weight: 800;
-      color: var(--green-light);
-      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+      font-size: 110px; font-weight: 700;
+      letter-spacing: -2px;
+      color: #F5C842;
+      line-height: 1; position: relative; z-index: 2;
+      transition: color 0.3s;
+      text-shadow: 0 0 20px rgba(245,200,66,0.4);
     }
+
+    /* ── FIRE EFFECTS ── */
+    .fire-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── MILESTONE OVERLAY ── */
+    .milestone-overlay {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; pointer-events: none;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .milestone-overlay.show { opacity: 1; }
+    .milestone-msg {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 800;
+      color: var(--white);
+      text-shadow: 0 0 20px #ff6600, 0 0 40px #ff3300;
+      text-align: center; padding: 20px 32px;
+      background: rgba(0,0,0,0.7);
+      border-radius: var(--radius-lg);
+      border: 2px solid #ff6600;
+      animation: popIn 0.3s ease;
+    }
+    @keyframes popIn { 0%{transform:scale(0.6)} 70%{transform:scale(1.08)} 100%{transform:scale(1)} }
 
     /* ── RESULT ROWS ── */
     .result-row {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      font-size: 14px;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 14px;
     }
     .result-row:last-child { border-bottom: none; }
     .result-label { color: var(--text-muted); }
     .result-val { font-weight: 500; color: var(--cream); text-align: right; max-width: 55%; }
-    .result-val.highlight {
-      font-family: var(--font-display);
-      font-size: 20px; font-weight: 800;
-      color: var(--green-light);
-    }
+    .result-val.highlight { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--green-light); }
 
-    /* ── REGISTROS ── */
     .reg-item {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-      margin-bottom: 8px;
-      cursor: pointer;
-      transition: border-color 0.15s;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--radius-md); padding: 12px 14px;
+      margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s;
     }
     .reg-item:active { border-color: var(--green-accent); }
     .reg-nome { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--cream); }
-    .reg-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
-    .reg-cantos {
-      font-family: var(--font-display); font-size: 22px; font-weight: 800;
-      color: var(--green-light); text-align: right;
-    }
+    .reg-sub  { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .reg-cantos { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--green-light); text-align: right; }
     .reg-cantos small { font-size: 10px; color: var(--text-muted); font-family: var(--font-body); font-weight: 400; display: block; text-align: right; }
     .reg-row { display: flex; justify-content: space-between; align-items: center; }
 
-    .empty-state {
-      text-align: center; color: var(--text-muted);
-      padding: 40px 0; font-size: 14px;
-    }
-    .empty-icon { font-size: 40px; margin-bottom: 10px; }
+    .empty-state { text-align: center; color: var(--text-muted); padding: 40px 0; font-size: 14px; }
+    .empty-icon  { font-size: 40px; margin-bottom: 10px; }
 
-    /* ── TOAST ── */
     .toast {
       position: fixed; bottom: 28px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: var(--green-mid);
-      border: 1px solid var(--green-accent);
-      color: var(--green-pale);
-      padding: 10px 22px; border-radius: 30px;
+      background: var(--green-mid); border: 1px solid var(--green-accent);
+      color: var(--green-pale); padding: 10px 22px; border-radius: 30px;
       font-size: 13px; font-weight: 500;
       opacity: 0; transition: all 0.25s;
-      pointer-events: none; white-space: nowrap;
-      z-index: 999;
+      pointer-events: none; white-space: nowrap; z-index: 998;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── DIVIDER ── */
     .divider { height: 1px; background: var(--card-border); margin: 4px 0 14px; }
 
-    /* scroll */
+    .foto-area {
+      width: 100%; border-radius: var(--radius-md);
+      overflow: hidden; margin-bottom: 12px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.04);
+      display: none;
+    }
+    .foto-area img { width: 100%; display: block; max-height: 220px; object-fit: cover; }
+    .btn-camera {
+      width: 100%; padding: 13px;
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed var(--card-border);
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 14px; font-weight: 700;
+      cursor: pointer; text-align: center;
+      margin-bottom: 10px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-camera:active { border-color: var(--green-accent); color: var(--green-light); }
+    .btn-camera.tem-foto { border-color: var(--green-accent); color: var(--green-light); border-style: solid; }
+    .torneio-loading { display:inline-block; width:10px; height:10px; border:2px solid var(--green-accent); border-top-color:transparent; border-radius:50%; animation:spin 0.7s linear infinite; margin-right:6px; vertical-align:middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .scroll-area { flex: 1; overflow-y: auto; }
     .scroll-area::-webkit-scrollbar { width: 3px; }
     .scroll-area::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
   </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YD9HKFM1HH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YD9HKFM1HH');
+  </script>
 </head>
 <body>
-
 <div id="app">
 
-  <!-- ═══ TELA CADASTRO ═══ -->
+  <!-- ═══ CADASTRO ═══ -->
   <div class="screen active" id="screen-cadastro">
     <div class="app-header" style="padding:20px 0 0;">
       <div class="app-logo">Canto<span>Livre</span></div>
       <button class="header-btn" onclick="verRegistros()">Registros</button>
     </div>
-
     <div style="flex:1; overflow-y:auto; margin-top:20px;">
       <p class="screen-title">Nova marcação</p>
-
       <div class="card">
         <p class="label">Nome da ave</p>
         <input type="text" id="inp-nome" placeholder="Ex: Batman" autocomplete="off"
@@ -389,36 +375,46 @@
 
         <p class="label">Marcador</p>
         <input type="text" id="inp-marcador" placeholder="Ex: Rogério">
+        <p class="label">Estado</p>
+        <select id="inp-estado" onchange="trocarEstado()" style="margin-bottom:10px;">
+          <option value="SP">SP — São Paulo</option>
+          <option value="RJ">RJ — Rio de Janeiro</option>
+          <option value="PR">PR — Paraná</option>
+          <option value="PE">PE — Pernambuco</option>
+          <option value="PA">PA — Pará</option>
+          <option value="CE">CE — Ceará</option>
+          <option value="AP">AP — Amapá</option>
+        </select>
 
-        <p class="label">Torneio</p>
-        <input type="text" id="inp-torneio" placeholder="Ex: Serca" style="margin-bottom:16px;">
+        <p class="label">Organizador / Torneio</p>
+        <div style="position:relative;">
+          <input type="text" id="inp-torneio" placeholder="Toque para ver a lista..." autocomplete="off"
+            oninput="filtrarTorneios()" onblur="setTimeout(esconderSugTorneio,200)" style="margin-bottom:4px;">
+          <div class="sugestoes" id="sugestoes-torneio"></div>
+        </div>
 
         <div class="divider"></div>
-
         <p class="label" style="margin-bottom:10px;">Duração do período</p>
         <div class="periodo-opts">
           <div class="periodo-opt" id="opt-1" onclick="selecionarPeriodo(1)">
-            <div class="opt-main">Parcial</div>
-            <div class="opt-sub">~1 min</div>
+            <div class="opt-main">Parcial</div><div class="opt-sub">~1 min</div>
           </div>
           <div class="periodo-opt selected" id="opt-10" onclick="selecionarPeriodo(10)">
-            <div class="opt-main">10 min</div>
-            <div class="opt-sub">período 1</div>
+            <div class="opt-main">10 min</div><div class="opt-sub">período 1</div>
           </div>
           <div class="periodo-opt" id="opt-15" onclick="selecionarPeriodo(15)">
-            <div class="opt-main">15 min</div>
-            <div class="opt-sub">período 2</div>
+            <div class="opt-main">15 min</div><div class="opt-sub">período 2</div>
           </div>
         </div>
       </div>
-
       <button class="btn btn-primary" onclick="iniciarCadastro()">Iniciar marcação</button>
     </div>
   </div>
 
-  <!-- ═══ TELA CONTAGEM ═══ -->
+  <!-- ═══ CONTAGEM ═══ -->
   <div class="screen" id="screen-conta">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <!-- topo: badge + cancelar -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
       <div class="timer-badge">
         <div class="timer-badge-dot" id="badge-dot"></div>
         <span id="badge-periodo">10 min</span>
@@ -426,26 +422,35 @@
       <button class="header-btn" onclick="confirmarVoltar()">Cancelar</button>
     </div>
 
-    <div class="timer-card">
-      <p class="ave-label">marcando</p>
-      <p class="ave-name-display" id="timer-ave-nome">—</p>
-      <div class="timer-display" id="timer-display">10:00</div>
-      <p class="timer-status" id="timer-status">Pronto para iniciar</p>
+    <!-- área central que cresce -->
+    <div class="conta-top">
+      <!-- timer -->
+      <div class="timer-card">
+        <p class="ave-label">marcando</p>
+        <p class="ave-name-display" id="timer-ave-nome">—</p>
+        <div class="timer-display" id="timer-display">10:00</div>
+        <p class="timer-status" id="timer-status">Pronto para iniciar</p>
+      </div>
+
+      <!-- botão cantou -->
+      <button class="canto-btn disabled" id="canto-btn" onclick="registrarCanto()">
+        <canvas class="fire-canvas" id="fire-canvas" height="80"></canvas>
+        <span class="canto-sub">cantos registrados</span>
+        <span class="canto-num" id="canto-count">0</span>
+        <span class="canto-sub">toque quando cantar</span>
+      </button>
     </div>
 
-    <button class="canto-btn disabled" id="canto-btn" onclick="registrarCanto()">
-      <span class="canto-sub">cantos registrados</span>
-      <span class="canto-num" id="canto-count">0</span>
-      <span class="canto-sub">toque quando cantar</span>
-    </button>
-
-    <div class="btn-row">
-      <button class="btn btn-primary" id="btn-iniciar" onclick="toggleTimer()">Iniciar</button>
-      <button class="btn btn-danger" onclick="resetarPeriodo()">Resetar</button>
+    <!-- botões fixos na base -->
+    <div class="conta-bottom">
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btn-iniciar" onclick="toggleTimer()">Iniciar</button>
+        <button class="btn btn-danger" onclick="resetarPeriodo()">Resetar</button>
+      </div>
     </div>
   </div>
 
-  <!-- ═══ TELA RESULTADO ═══ -->
+  <!-- ═══ RESULTADO ═══ -->
   <div class="screen" id="screen-resultado">
     <p class="screen-title" style="margin-top:8px;">Resultado</p>
     <div class="card">
@@ -456,15 +461,28 @@
       <div class="result-row"><span class="result-label">Data</span><span class="result-val" id="res-data"></span></div>
       <div class="result-row"><span class="result-label" id="res-periodo-label">Período</span><span class="result-val highlight" id="res-cantos"></span></div>
     </div>
+    <!-- input câmera oculto -->
+  <input type="file" id="inp-foto" accept="image/*" capture="environment"
+    style="display:none;" onchange="processarFoto(event)">
 
-    <div class="btn-row">
+  <!-- preview da foto -->
+  <div class="foto-area" id="foto-area">
+    <img id="foto-preview" src="" alt="Foto da ficha">
+  </div>
+
+  <!-- botão câmera -->
+  <button class="btn-camera" id="btn-camera" onclick="document.getElementById('inp-foto').click()">
+    📷 Foto da Ficha
+  </button>
+
+  <div class="btn-row">
       <button class="btn btn-primary" onclick="salvarRegistro()">Salvar</button>
       <button class="btn btn-whatsapp" onclick="compartilharWhatsApp()">WhatsApp</button>
     </div>
-    <button class="btn btn-secondary" onclick="novaAve()">Nova ave</button>
+    <button class="btn btn-secondary" onclick="novaAve()">NOVA MARCAÇÃO</button>
   </div>
 
-  <!-- ═══ TELA REGISTROS ═══ -->
+  <!-- ═══ REGISTROS ═══ -->
   <div class="screen" id="screen-registros">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
       <p class="screen-title" style="margin:0;">Registros</p>
@@ -474,7 +492,7 @@
     <button class="btn btn-danger" onclick="limparTodos()" style="margin-top:8px;">Limpar todos</button>
   </div>
 
-  <!-- ═══ TELA DETALHE ═══ -->
+  <!-- ═══ DETALHE ═══ -->
   <div class="screen" id="screen-detalhe">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
       <p class="screen-title" style="margin:0;">Detalhe</p>
@@ -489,284 +507,614 @@
 
 </div><!-- /app -->
 
+<!-- milestone overlay -->
+<div class="milestone-overlay" id="milestone-overlay">
+  <div class="milestone-msg" id="milestone-msg">🔥 200!</div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-  // ── STATE ──
-  let state = {
-    nome:'', especie:'', marcador:'', torneio:'',
-    duracao: 10, cantos: 0,
-    timerSec: 0, timerRunning: false, timerInterval: null,
-    detalheIdx: -1, jaFoiSalvo: false
-  };
+// ── STATE ──
+let state = {
+  nome:'', especie:'', marcador:'', torneio:'',
+  duracao: 10, cantos: 0,
+  timerSec: 0, timerRunning: false, timerInterval: null,
+  detalheIdx: -1, jaFoiSalvo: false,
+  wakeLock: null,
+  foto: null,
+  milestoneShown: { 200: false }
+};
 
-  // ── UTILS ──
-  function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+// ── FIRE ──
+let fireCtx = null;
+let fireAnim = null;
+let fireParticles = [];
+let fireLevel = 0; // 0=off 1=sparks 2=fire 3=more 4=intense
+
+function initFire() {
+  const canvas = document.getElementById('fire-canvas');
+  const btn = document.getElementById('canto-btn');
+  canvas.width  = btn.offsetWidth  || 300;
+  canvas.height = btn.offsetHeight || 180;
+  fireCtx = canvas.getContext('2d');
+}
+
+function setFireLevel(level) {
+  fireLevel = level;
+  if (level === 0) {
+    cancelAnimationFrame(fireAnim);
+    fireAnim = null;
+    fireParticles = [];
+    if (fireCtx) fireCtx.clearRect(0, 0, fireCtx.canvas.width, fireCtx.canvas.height);
+    return;
+  }
+  if (!fireAnim) animateFire();
+}
+
+function spawnParticle(canvas) {
+  const count = fireLevel === 1 ? 1 : fireLevel === 2 ? 2 : fireLevel === 3 ? 3 : 5;
+  for (let i = 0; i < count; i++) {
+    const x = Math.random() * canvas.width;
+    const size = fireLevel === 1
+      ? 2 + Math.random() * 3
+      : fireLevel === 2
+      ? 4 + Math.random() * 6
+      : fireLevel === 3
+      ? 5 + Math.random() * 9
+      : 6 + Math.random() * 12;
+    fireParticles.push({
+      x, y: canvas.height,
+      vx: (Math.random() - 0.5) * (fireLevel * 0.8),
+      vy: -(1.8 + Math.random() * (fireLevel * 1.6)),
+      size,
+      life: 1,
+      decay: 0.010 + Math.random() * 0.015,
+      hue: 15 + Math.random() * 30
+    });
+  }
+}
+
+function animateFire() {
+  const canvas = document.getElementById('fire-canvas');
+  if (!canvas || !fireCtx) return;
+  const btn = document.getElementById('canto-btn');
+  canvas.width  = btn.offsetWidth  || canvas.width;
+  canvas.height = btn.offsetHeight || canvas.height;
+  fireCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+  spawnParticle(canvas);
+
+  fireParticles = fireParticles.filter(p => p.life > 0);
+  for (const p of fireParticles) {
+    p.x  += p.vx;
+    p.y  += p.vy;
+    p.vy *= 0.98;
+    p.vx += (Math.random() - 0.5) * 0.3;
+    p.life -= p.decay;
+    const alpha = p.life;
+    const grad = fireCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+    grad.addColorStop(0, `hsla(${p.hue}, 100%, 80%, ${alpha})`);
+    grad.addColorStop(0.4, `hsla(${p.hue - 5}, 100%, 55%, ${alpha * 0.8})`);
+    grad.addColorStop(1, `hsla(${p.hue - 10}, 100%, 30%, 0)`);
+    fireCtx.beginPath();
+    fireCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    fireCtx.fillStyle = grad;
+    fireCtx.fill();
   }
 
-  function toast(msg) {
-    const el = document.getElementById('toast');
-    el.textContent = msg;
-    el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 2400);
-  }
+  fireAnim = requestAnimationFrame(animateFire);
+}
 
-  function hoje() {
-    const d = new Date();
-    return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
-  }
+function updateFire(cantos) {
+  if (cantos < 50)       setFireLevel(0);
+  else if (cantos < 100) setFireLevel(1); // faíscas
+  else if (cantos < 150) setFireLevel(2); // fogo
+  else if (cantos < 200) setFireLevel(3); // fogo maior
+  else                   setFireLevel(4); // fogo intenso
+}
 
-  // ── AUTOCOMPLETE ──
-  function getAvesNomes() {
-    try { return JSON.parse(localStorage.getItem('aves_nomes') || '[]'); } catch(e) { return []; }
+// ── VIBRAÇÃO ──
+function vibrar(pattern) {
+  if ('vibrate' in navigator) {
+    navigator.vibrate(pattern);
   }
-  function salvarNomeAve(nome) {
-    if (!nome) return;
-    let lista = getAvesNomes();
-    lista = [nome, ...lista.filter(n => n.toLowerCase() !== nome.toLowerCase())].slice(0, 40);
-    localStorage.setItem('aves_nomes', JSON.stringify(lista));
-  }
-  function filtrarSugestoes() {
-    const val = document.getElementById('inp-nome').value.trim().toLowerCase();
-    const box = document.getElementById('sugestoes');
-    const lista = getAvesNomes();
-    const filtradas = val ? lista.filter(n => n.toLowerCase().includes(val)) : lista;
-    if (!filtradas.length) { box.style.display = 'none'; return; }
-    box.innerHTML = filtradas.map(n =>
-      `<div class="sug-item" onmousedown="selecionarNome('${n.replace(/'/g,"\\'")}')">🐦 ${n}</div>`
-    ).join('');
-    box.style.display = 'block';
-  }
-  function selecionarNome(nome) {
-    document.getElementById('inp-nome').value = nome;
-    document.getElementById('sugestoes').style.display = 'none';
-  }
-  function esconderSug() {
-    document.getElementById('sugestoes').style.display = 'none';
-  }
+}
 
-  // ── PERÍODO ──
-  function selecionarPeriodo(mins) {
-    state.duracao = mins;
-    document.querySelectorAll('.periodo-opt').forEach(el => el.classList.remove('selected'));
-    document.getElementById('opt-' + mins).classList.add('selected');
+// ── MILESTONE ──
+function checkMilestone(cantos) {
+  if (cantos === 200 && !state.milestoneShown[200]) {
+    state.milestoneShown[200] = true;
+    showMilestone('🔥 ROMPEU OS 200! 🔥');
   }
+}
 
-  // ── INÍCIO ──
-  function iniciarCadastro() {
-    state.nome    = document.getElementById('inp-nome').value.trim();
-    state.especie = document.getElementById('inp-especie').value;
-    state.marcador= document.getElementById('inp-marcador').value.trim();
-    state.torneio = document.getElementById('inp-torneio').value.trim();
-    if (!state.nome)    { toast('Informe o nome da ave'); return; }
-    if (!state.especie) { toast('Selecione a espécie'); return; }
-    salvarNomeAve(state.nome);
-    state.cantos = 0;
-    state.jaFoiSalvo = false;
-    setupTimer();
-    showScreen('screen-conta');
+function showMilestone(msg) {
+  const overlay = document.getElementById('milestone-overlay');
+  document.getElementById('milestone-msg').textContent = msg;
+  overlay.classList.add('show');
+  vibrar([100, 50, 100, 50, 200]);
+  setTimeout(() => overlay.classList.remove('show'), 1800);
+}
+
+// ── UTILS ──
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+function hoje() {
+  const d = new Date();
+  return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+}
+
+// ── AUTOCOMPLETE ──
+function getAvesNomes() {
+  try { return JSON.parse(localStorage.getItem('aves_nomes') || '[]'); } catch(e) { return []; }
+}
+function salvarNomeAve(nome) {
+  if (!nome) return;
+  let lista = getAvesNomes();
+  lista = [nome, ...lista.filter(n => n.toLowerCase() !== nome.toLowerCase())].slice(0, 40);
+  localStorage.setItem('aves_nomes', JSON.stringify(lista));
+}
+function filtrarSugestoes() {
+  const val = document.getElementById('inp-nome').value.trim().toLowerCase();
+  const box = document.getElementById('sugestoes');
+  const lista = getAvesNomes();
+  const filtradas = val ? lista.filter(n => n.toLowerCase().includes(val)) : lista;
+  if (!filtradas.length) { box.style.display = 'none'; return; }
+  box.innerHTML = filtradas.map(n =>
+    `<div class="sug-item" onmousedown="selecionarNome('${n.replace(/'/g,"\\'")}')">🐦 ${n}</div>`
+  ).join('');
+  box.style.display = 'block';
+}
+function selecionarNome(nome) {
+  document.getElementById('inp-nome').value = nome;
+  document.getElementById('sugestoes').style.display = 'none';
+}
+function esconderSug() { document.getElementById('sugestoes').style.display = 'none'; }
+
+// ── PERÍODO ──
+function selecionarPeriodo(mins) {
+  state.duracao = mins;
+  document.querySelectorAll('.periodo-opt').forEach(el => el.classList.remove('selected'));
+  document.getElementById('opt-' + mins).classList.add('selected');
+}
+
+// ── INÍCIO ──
+function iniciarCadastro() {
+  state.nome    = document.getElementById('inp-nome').value.trim();
+  state.especie = document.getElementById('inp-especie').value;
+  state.marcador= document.getElementById('inp-marcador').value.trim();
+  state.torneio = document.getElementById('inp-torneio').value.trim();
+  if (!state.nome)    { toast('Informe o nome da ave'); return; }
+  if (!state.especie) { toast('Selecione a espécie'); return; }
+  salvarNomeAve(state.nome);
+  state.cantos = 0;
+  state.jaFoiSalvo = false;
+  state.foto = null;
+  state.milestoneShown = { 200: false };
+  setupTimer();
+  showScreen('screen-conta');
+  setTimeout(initFire, 100);
+}
+
+function setupTimer() {
+  clearInterval(state.timerInterval);
+  state.timerRunning = false;
+  state.timerSec = state.duracao * 60;
+  const label = state.duracao === 1 ? 'Parcial' : `${state.duracao} min`;
+  document.getElementById('badge-periodo').textContent = label;
+  document.getElementById('badge-dot').classList.remove('running');
+  document.getElementById('timer-ave-nome').textContent = state.nome + ' · ' + state.especie;
+  document.getElementById('canto-count').textContent = '0';
+  document.getElementById('btn-iniciar').textContent = 'Iniciar';
+  document.getElementById('timer-status').textContent = 'Pronto para iniciar';
+  document.getElementById('canto-btn').classList.add('disabled');
+  setFireLevel(0);
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(state.timerSec / 60);
+  const s = state.timerSec % 60;
+  const el = document.getElementById('timer-display');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer-display';
+  if (state.timerRunning) {
+    if (state.timerSec <= 30) el.classList.add('danger');
+    else if (state.timerSec <= 60) el.classList.add('warning');
   }
+}
 
-  function setupTimer() {
+async function ativarWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      state.wakeLock = await navigator.wakeLock.request('screen');
+    }
+  } catch(e) {}
+}
+
+function liberarWakeLock() {
+  if (state.wakeLock) {
+    state.wakeLock.release();
+    state.wakeLock = null;
+  }
+}
+
+// Reativar se o app voltar ao foco
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && state.timerRunning) {
+    ativarWakeLock();
+  }
+});
+
+function toggleTimer() {
+  if (state.timerRunning) {
     clearInterval(state.timerInterval);
     state.timerRunning = false;
-    state.timerSec = state.duracao * 60;
-    const label = state.duracao === 1 ? 'Parcial' : `${state.duracao} min`;
-    document.getElementById('badge-periodo').textContent = label;
+    document.getElementById('btn-iniciar').textContent = 'Retomar';
+    document.getElementById('timer-status').textContent = 'Pausado';
     document.getElementById('badge-dot').classList.remove('running');
-    document.getElementById('timer-ave-nome').textContent = state.nome + ' · ' + state.especie;
-    document.getElementById('canto-count').textContent = '0';
-    document.getElementById('btn-iniciar').textContent = 'Iniciar';
-    document.getElementById('timer-status').textContent = 'Pronto para iniciar';
     document.getElementById('canto-btn').classList.add('disabled');
-    updateTimerDisplay();
+  } else {
+    if (state.timerSec <= 0) return;
+    state.timerRunning = true;
+    document.getElementById('btn-iniciar').textContent = 'Pausar';
+    document.getElementById('timer-status').textContent = 'Contando...';
+    document.getElementById('badge-dot').classList.add('running');
+    document.getElementById('canto-btn').classList.remove('disabled');
+    state.timerInterval = setInterval(() => {
+      if (state.timerSec > 0) {
+        state.timerSec--;
+        updateTimerDisplay();
+      } else {
+        clearInterval(state.timerInterval);
+        state.timerRunning = false;
+        document.getElementById('timer-status').textContent = 'Período encerrado!';
+        document.getElementById('badge-dot').classList.remove('running');
+        document.getElementById('canto-btn').classList.add('disabled');
+        liberarWakeLock();
+        setFireLevel(0);
+        setTimeout(mostrarResultado, 700);
+      }
+    }, 1000);
   }
+}
 
-  function updateTimerDisplay() {
-    const m = Math.floor(state.timerSec / 60);
-    const s = state.timerSec % 60;
-    const el = document.getElementById('timer-display');
-    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    el.className = 'timer-display';
-    if (state.timerRunning) {
-      if (state.timerSec <= 30) el.classList.add('danger');
-      else if (state.timerSec <= 60) el.classList.add('warning');
-    }
+function registrarCanto() {
+  if (!state.timerRunning) return;
+  state.cantos++;
+  document.getElementById('canto-count').textContent = state.cantos;
+
+  // flash
+  const btn = document.getElementById('canto-btn');
+  btn.classList.add('flash');
+  setTimeout(() => btn.classList.remove('flash'), 120);
+
+  // fogo
+  updateFire(state.cantos);
+
+  // vibração a cada 50
+  if (state.cantos % 50 === 0) vibrar([80, 40, 80, 40, 160]);
+
+  // vibração leve a cada clique acima de 150
+  if (state.cantos > 150) vibrar(30);
+
+  // milestone 200
+  checkMilestone(state.cantos);
+}
+
+function resetarPeriodo() {
+  clearInterval(state.timerInterval);
+  state.timerRunning = false;
+  liberarWakeLock();
+  state.cantos = 0;
+  state.milestoneShown = { 200: false };
+  setFireLevel(0);
+  setupTimer();
+}
+
+function confirmarVoltar() {
+  if (state.timerRunning || state.cantos > 0) {
+    if (!confirm('Deseja cancelar a marcação atual?')) return;
   }
+  clearInterval(state.timerInterval);
+  state.timerRunning = false;
+  liberarWakeLock();
+  setFireLevel(0);
+  showScreen('screen-cadastro');
+}
 
-  function toggleTimer() {
-    if (state.timerRunning) {
-      clearInterval(state.timerInterval);
-      state.timerRunning = false;
-      document.getElementById('btn-iniciar').textContent = 'Retomar';
-      document.getElementById('timer-status').textContent = 'Pausado';
-      document.getElementById('badge-dot').classList.remove('running');
-      document.getElementById('canto-btn').classList.add('disabled');
-    } else {
-      if (state.timerSec <= 0) return;
-      state.timerRunning = true;
-      document.getElementById('btn-iniciar').textContent = 'Pausar';
-      document.getElementById('timer-status').textContent = 'Contando...';
-      document.getElementById('badge-dot').classList.add('running');
-      document.getElementById('canto-btn').classList.remove('disabled');
-      state.timerInterval = setInterval(() => {
-        if (state.timerSec > 0) {
-          state.timerSec--;
-          updateTimerDisplay();
-        } else {
-          clearInterval(state.timerInterval);
-          state.timerRunning = false;
-          document.getElementById('timer-status').textContent = 'Período encerrado!';
-          document.getElementById('badge-dot').classList.remove('running');
-          document.getElementById('canto-btn').classList.add('disabled');
-          setTimeout(mostrarResultado, 700);
-        }
-      }, 1000);
-    }
-  }
+// ── RESULTADO ──
+function mostrarResultado() {
+  const dl = state.duracao === 1 ? 'Parcial' : `${state.duracao} min`;
+  document.getElementById('res-nome').textContent     = state.nome;
+  document.getElementById('res-especie').textContent  = state.especie;
+  document.getElementById('res-marcador').textContent = state.marcador || '—';
+  document.getElementById('res-torneio').textContent  = state.torneio  || '—';
+  document.getElementById('res-data').textContent     = hoje();
+  document.getElementById('res-periodo-label').textContent = `Cantos (${dl})`;
+  document.getElementById('res-cantos').textContent   = state.cantos;
+  // reset foto
+  state.foto = null;
+  document.getElementById('foto-area').style.display = 'none';
+  document.getElementById('foto-preview').src = '';
+  document.getElementById('btn-camera').className = 'btn-camera';
+  document.getElementById('btn-camera').textContent = '📷 Foto da Ficha';
+  showScreen('screen-resultado');
+}
 
-  function registrarCanto() {
-    if (!state.timerRunning) return;
-    state.cantos++;
-    document.getElementById('canto-count').textContent = state.cantos;
-    const btn = document.getElementById('canto-btn');
-    btn.classList.add('flash');
-    setTimeout(() => btn.classList.remove('flash'), 150);
-  }
+// ── STORAGE ──
+function getRegistros() {
+  try { return JSON.parse(localStorage.getItem('cantos_registros') || '[]'); } catch(e) { return []; }
+}
+function setRegistros(r) { localStorage.setItem('cantos_registros', JSON.stringify(r)); }
 
-  function resetarPeriodo() {
-    clearInterval(state.timerInterval);
-    state.timerRunning = false;
-    state.cantos = 0;
-    setupTimer();
-  }
-
-  function confirmarVoltar() {
-    if (state.timerRunning || state.cantos > 0) {
-      if (!confirm('Deseja cancelar a marcação atual?')) return;
-    }
-    clearInterval(state.timerInterval);
-    state.timerRunning = false;
-    showScreen('screen-cadastro');
-  }
-
-  // ── RESULTADO ──
-  function mostrarResultado() {
-    const dl = state.duracao === 1 ? 'Parcial' : `${state.duracao} min`;
-    document.getElementById('res-nome').textContent    = state.nome;
-    document.getElementById('res-especie').textContent = state.especie;
-    document.getElementById('res-marcador').textContent= state.marcador || '—';
-    document.getElementById('res-torneio').textContent = state.torneio  || '—';
-    document.getElementById('res-data').textContent    = hoje();
-    document.getElementById('res-periodo-label').textContent = `Cantos (${dl})`;
-    document.getElementById('res-cantos').textContent  = state.cantos;
-    showScreen('screen-resultado');
-  }
-
-  // ── STORAGE ──
-  function getRegistros() {
-    try { return JSON.parse(localStorage.getItem('cantos_registros') || '[]'); } catch(e) { return []; }
-  }
-  function setRegistros(r) { localStorage.setItem('cantos_registros', JSON.stringify(r)); }
-
-  function salvarRegistro() {
-    if (state.jaFoiSalvo) { toast('Já foi salvo!'); return; }
-    const reg = {
-      nome: state.nome, especie: state.especie, marcador: state.marcador,
-      torneio: state.torneio, data: hoje(), duracao: state.duracao, cantos: state.cantos
+function processarFoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    // Comprimir imagem para caber no localStorage (~200KB max)
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 800;
+      let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const compressed = canvas.toDataURL('image/jpeg', 0.7);
+      state.foto = compressed;
+      document.getElementById('foto-preview').src = compressed;
+      document.getElementById('foto-area').style.display = 'block';
+      const btn = document.getElementById('btn-camera');
+      btn.className = 'btn-camera tem-foto';
+      btn.textContent = '📷 Trocar Foto';
+      document.getElementById('inp-foto').value = '';
     };
-    const regs = getRegistros();
-    regs.unshift(reg);
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function salvarRegistro() {
+  if (state.jaFoiSalvo) { toast('Já foi salvo!'); return; }
+  const reg = { nome:state.nome, especie:state.especie, marcador:state.marcador,
+                torneio:state.torneio, data:hoje(), duracao:state.duracao, cantos:state.cantos,
+                foto: state.foto || null };
+  const regs = getRegistros();
+  regs.unshift(reg);
+  try {
     setRegistros(regs);
     state.jaFoiSalvo = true;
     toast('✓ Registro salvo!');
+  } catch(e) {
+    // localStorage cheio — tenta salvar sem a foto
+    try {
+      reg.foto = null;
+      regs[0] = reg;
+      setRegistros(regs);
+      state.jaFoiSalvo = true;
+      toast('✓ Salvo! (foto muito grande, não armazenada)');
+    } catch(e2) {
+      toast('Erro ao salvar — armazenamento cheio');
+    }
   }
+}
 
-  function textoCompartilhar(reg) {
-    const dl = reg.duracao === 1 ? 'Parcial' : `${reg.duracao} min`;
-    return `🐦 *Torneio de Aves — Canto Livre*\n\nAve: ${reg.nome}\nEspécie: ${reg.especie || '—'}\nTorneio: ${reg.torneio || '—'}\nData: ${reg.data}\nMarcador: ${reg.marcador || '—'}\nPeríodo: ${dl}\nCantos: *${reg.cantos}*`;
-  }
+function textoCompartilhar(reg) {
+  const dl = reg.duracao === 1 ? 'Parcial' : `${reg.duracao} min`;
+  return `🐦 *Torneio de Aves — Canto Livre*\n\nAve: ${reg.nome}\nEspécie: ${reg.especie || '—'}\nTorneio: ${reg.torneio || '—'}\nData: ${reg.data}\nMarcador: ${reg.marcador || '—'}\nPeríodo: ${dl}\nCantos: *${reg.cantos}*`;
+}
 
-  function compartilharWhatsApp() {
-    const reg = { nome:state.nome, especie:state.especie, marcador:state.marcador,
-                  torneio:state.torneio, data:hoje(), duracao:state.duracao, cantos:state.cantos };
+function compartilharWhatsApp() {
+  const reg = { nome:state.nome, especie:state.especie, marcador:state.marcador,
+                torneio:state.torneio, data:hoje(), duracao:state.duracao, cantos:state.cantos };
+  if (state.foto) {
+    // Baixa a foto automaticamente antes de abrir o WhatsApp
+    const a = document.createElement('a');
+    a.href = state.foto;
+    a.download = `ficha-${state.nome}-${hoje().replace(/\//g,'-')}.jpg`;
+    a.click();
+    setTimeout(() => {
+      window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(reg)), '_blank');
+      toast('📎 Foto salva! Anexe-a no WhatsApp.');
+    }, 600);
+  } else {
     window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(reg)), '_blank');
   }
+}
 
-  function novaAve() {
-    document.getElementById('inp-nome').value = '';
-    document.getElementById('inp-especie').value = '';
-    showScreen('screen-cadastro');
-  }
+function novaAve() {
+  document.getElementById('inp-nome').value = '';
+  document.getElementById('inp-especie').value = '';
+  showScreen('screen-cadastro');
+}
 
-  // ── REGISTROS ──
-  function verRegistros() {
-    const regs = getRegistros();
-    const lista = document.getElementById('lista-registros');
-    if (!regs.length) {
-      lista.innerHTML = `<div class="empty-state"><div class="empty-icon">🐦</div>Nenhum registro salvo ainda.</div>`;
-    } else {
-      lista.innerHTML = regs.map((r, i) => {
-        const dl = r.duracao === 1 ? 'Parcial' : `${r.duracao}min`;
-        return `<div class="reg-item" onclick="verDetalhe(${i})">
-          <div class="reg-row">
-            <div>
-              <p class="reg-nome">${r.nome}</p>
-              <p class="reg-sub">${r.especie} · ${r.data} · ${r.torneio || '—'} · ${dl}</p>
-            </div>
-            <div>
-              <p class="reg-cantos">${r.cantos}<small>cantos</small></p>
-            </div>
-          </div>
-        </div>`;
-      }).join('');
-    }
-    showScreen('screen-registros');
+function verRegistros() {
+  const regs = getRegistros();
+  const lista = document.getElementById('lista-registros');
+  if (!regs.length) {
+    lista.innerHTML = `<div class="empty-state"><div class="empty-icon">🐦</div>Nenhum registro salvo ainda.</div>`;
+  } else {
+    lista.innerHTML = regs.map((r, i) => {
+      const dl = r.duracao === 1 ? 'Parcial' : `${r.duracao}min`;
+      return `<div class="reg-item" onclick="verDetalhe(${i})">
+        <div class="reg-row">
+          <div><p class="reg-nome">${r.nome}</p><p class="reg-sub">${r.especie} · ${r.data} · ${r.torneio || '—'} · ${dl}</p></div>
+          <div><p class="reg-cantos">${r.cantos}<small>cantos</small></p></div>
+        </div></div>`;
+    }).join('');
   }
+  showScreen('screen-registros');
+}
 
-  function verDetalhe(i) {
-    state.detalheIdx = i;
-    const r = getRegistros()[i];
-    const dl = r.duracao === 1 ? 'Parcial' : `${r.duracao} min`;
-    document.getElementById('detalhe-card').innerHTML = `
-      <div class="result-row"><span class="result-label">Nome</span><span class="result-val">${r.nome}</span></div>
-      <div class="result-row"><span class="result-label">Espécie</span><span class="result-val">${r.especie || '—'}</span></div>
-      <div class="result-row"><span class="result-label">Marcador</span><span class="result-val">${r.marcador || '—'}</span></div>
-      <div class="result-row"><span class="result-label">Torneio</span><span class="result-val">${r.torneio || '—'}</span></div>
-      <div class="result-row"><span class="result-label">Data</span><span class="result-val">${r.data}</span></div>
-      <div class="result-row"><span class="result-label">Período</span><span class="result-val">${dl}</span></div>
-      <div class="result-row"><span class="result-label">Cantos</span><span class="result-val highlight">${r.cantos}</span></div>`;
-    showScreen('screen-detalhe');
-  }
+function verDetalhe(i) {
+  state.detalheIdx = i;
+  const r = getRegistros()[i];
+  const dl = r.duracao === 1 ? 'Parcial' : `${r.duracao} min`;
+  document.getElementById('detalhe-card').innerHTML = `
+    <div class="result-row"><span class="result-label">Nome</span><span class="result-val">${r.nome}</span></div>
+    <div class="result-row"><span class="result-label">Espécie</span><span class="result-val">${r.especie||'—'}</span></div>
+    <div class="result-row"><span class="result-label">Marcador</span><span class="result-val">${r.marcador||'—'}</span></div>
+    <div class="result-row"><span class="result-label">Torneio</span><span class="result-val">${r.torneio||'—'}</span></div>
+    <div class="result-row"><span class="result-label">Data</span><span class="result-val">${r.data}</span></div>
+    <div class="result-row"><span class="result-label">Período</span><span class="result-val">${dl}</span></div>
+    <div class="result-row"><span class="result-label">Cantos</span><span class="result-val highlight">${r.cantos}</span></div>
+    ${r.foto ? `<div style="margin-top:12px;border-radius:var(--radius-md);overflow:hidden;"><img src="${r.foto}" style="width:100%;display:block;max-height:220px;object-fit:cover;"></div>` : ''}`;
+  showScreen('screen-detalhe');
+}
 
-  function compartilharDetalhe() {
-    window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(getRegistros()[state.detalheIdx])), '_blank');
-  }
+function compartilharDetalhe() {
+  window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(getRegistros()[state.detalheIdx])), '_blank');
+}
 
-  function excluirRegistro() {
-    if (!confirm('Excluir este registro?')) return;
-    const regs = getRegistros();
-    regs.splice(state.detalheIdx, 1);
-    setRegistros(regs);
-    toast('Excluído');
-    verRegistros();
-  }
+function excluirRegistro() {
+  if (!confirm('Excluir este registro?')) return;
+  const regs = getRegistros(); regs.splice(state.detalheIdx, 1); setRegistros(regs);
+  toast('Excluído'); verRegistros();
+}
 
-  function limparTodos() {
-    if (!confirm('Apagar TODOS os registros? Esta ação não pode ser desfeita.')) return;
-    localStorage.removeItem('cantos_registros');
-    verRegistros();
-  }
+function limparTodos() {
+  if (!confirm('Apagar TODOS os registros? Esta ação não pode ser desfeita.')) return;
+  localStorage.removeItem('cantos_registros'); verRegistros();
+}
 
-  // ── SERVICE WORKER ──
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .catch(err => console.log('SW error:', err));
-    });
+// ── ORGANIZADORES ──
+const ORGANIZADORES = {
+  SP: [
+    'BCSO — Clube do Bico Seco',
+    'ASSOSV — Assoc. de São Vicente',
+    'SOPASO — Soc. Paulista de Pássaros',
+    'FEOSP — Fed. Est. Ornitológica de SP',
+    'ABROCOL — Assoc. Brasileira do Coleiro',
+    'ACAU — Assoc. Criadores Alto Uruguai',
+    'CCPCAR — Clube Criadores de Pássaros',
+    'SOIGA — Soc. Ornitológica do Interior',
+    'ALTA MOGIANA — Regional',
+    'APASSP — Assoc. Paulista de Pássaros'
+  ],
+  RJ: [
+    'FEEPAERJ — Fed. Est. de Pássaros do RJ',
+    'SONIT — Soc. Ornitológica Niteroiense',
+    'ACRJ — Assoc. Criadores do RJ',
+    'COBRAP — Conf. Brasileira de Pássaros'
+  ],
+  PR: [
+    'FECRIPAR — Fed. Criadores de Pássaros PR',
+    'ACPFAZ — Assoc. Criadores Fazenda Rio Grande',
+    'AOPA — Assoc. Ornitológica do Paraná'
+  ],
+  PE: [
+    'AOPE — Assoc. Ornitológica de Pernambuco',
+    'FEOPPE — Fed. Ornitológica de PE'
+  ],
+  CE: [
+    'AOCCE — Assoc. Ornitológica do Ceará',
+    'COBRAP — Conf. Brasileira de Pássaros'
+  ],
+  PA: [
+    'AOPA — Assoc. Ornitológica do Pará',
+    'FEOPA — Fed. Ornitológica do Pará'
+  ],
+  AP: [
+    'AMAP — Assoc. Ornitológica do Amapá'
+  ],
+  ES: [
+    'AOES — Assoc. Ornitológica do ES',
+    'FEOES — Fed. Ornitológica do ES'
+  ],
+  DF: [
+    'AODF — Assoc. Ornitológica do DF',
+    'COBRAP — Conf. Brasileira de Pássaros'
+  ]
+};
+
+// Extras adicionados pelo usuário
+function getOrganizadoresExtras() {
+  try { return JSON.parse(localStorage.getItem('org_extras') || '{}'); } catch(e) { return {}; }
+}
+
+function getOrganizadoresUF(uf) {
+  const base   = ORGANIZADORES[uf] || [];
+  const extras = getOrganizadoresExtras()[uf] || [];
+  return [...new Set([...base, ...extras])];
+}
+
+function salvarOrganizadorExtra(uf, nome) {
+  const extras = getOrganizadoresExtras();
+  if (!extras[uf]) extras[uf] = [];
+  if (!extras[uf].includes(nome)) {
+    extras[uf].unshift(nome);
+    localStorage.setItem('org_extras', JSON.stringify(extras));
   }
+}
+
+function preencherSugestoesTorneio(lista) {
+  const box = document.getElementById('sugestoes-torneio');
+  if (!lista.length) { box.style.display = 'none'; return; }
+  box.innerHTML = lista.map(t =>
+    `<div class="sug-item" onmousedown="selecionarTorneio('${t.replace(/'/g,"\'")}')">
+      🏆 ${t}
+    </div>`
+  ).join('');
+  box.style.display = 'block';
+}
+
+function filtrarTorneios() {
+  const val = document.getElementById('inp-torneio').value.trim().toLowerCase();
+  const uf  = document.getElementById('inp-estado').value;
+  const lista = getOrganizadoresUF(uf);
+  if (!val) { document.getElementById('sugestoes-torneio').style.display = 'none'; return; }
+  preencherSugestoesTorneio(lista.filter(t => t.toLowerCase().includes(val)));
+}
+
+function mostrarTodosTorneios() {
+  preencherSugestoesTorneio(getOrganizadoresUF(document.getElementById('inp-estado').value));
+}
+
+function selecionarTorneio(nome) {
+  document.getElementById('inp-torneio').value = nome;
+  document.getElementById('sugestoes-torneio').style.display = 'none';
+}
+
+function esconderSugTorneio() {
+  document.getElementById('sugestoes-torneio').style.display = 'none';
+}
+
+function trocarEstado() {
+  document.getElementById('inp-torneio').value = '';
+  document.getElementById('sugestoes-torneio').style.display = 'none';
+}
+
+function adicionarOrganizadorManual() {
+  const nome = document.getElementById('inp-torneio').value.trim();
+  const uf   = document.getElementById('inp-estado').value;
+  if (!nome) { toast('Digite o nome do organizador'); return; }
+  salvarOrganizadorExtra(uf, nome);
+  toast('✓ Organizador salvo!');
+  document.getElementById('sugestoes-torneio').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const inp = document.getElementById('inp-torneio');
+  if (inp) inp.addEventListener('focus', mostrarTodosTorneios);
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
 </script>
 </body>
 </html>
