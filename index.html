@@ -400,7 +400,7 @@
         <p class="label">Organizador / Torneio</p>
         <div style="position:relative;">
           <input type="text" id="inp-torneio" placeholder="Toque para ver a lista..." autocomplete="off"
-            oninput="filtrarTorneios()" onblur="setTimeout(esconderSugTorneio,200)" style="margin-bottom:4px;">
+            oninput="filtrarTorneios()" onfocus="mostrarTodosTorneios()" onblur="setTimeout(esconderSugTorneio,200)" style="margin-bottom:4px;">
           <div class="sugestoes" id="sugestoes-torneio"></div>
         </div>
 
@@ -1176,10 +1176,7 @@ function adicionarOrganizadorManual() {
   document.getElementById('sugestoes-torneio').style.display = 'none';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const inp = document.getElementById('inp-torneio');
-  if (inp) inp.addEventListener('focus', mostrarTodosTorneios);
-});
+// foco gerenciado diretamente no input
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
