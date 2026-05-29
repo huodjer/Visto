@@ -379,11 +379,22 @@
         <select id="inp-estado" onchange="trocarEstado()" style="margin-bottom:10px;">
           <option value="SP">SP — São Paulo</option>
           <option value="RJ">RJ — Rio de Janeiro</option>
+          <option value="MG">MG — Minas Gerais</option>
           <option value="PR">PR — Paraná</option>
+          <option value="RS">RS — Rio Grande do Sul</option>
+          <option value="SC">SC — Santa Catarina</option>
+          <option value="ES">ES — Espírito Santo</option>
+          <option value="BA">BA — Bahia</option>
+          <option value="GO">GO — Goiás</option>
+          <option value="MS">MS — Mato Grosso do Sul</option>
+          <option value="MT">MT — Mato Grosso</option>
           <option value="PE">PE — Pernambuco</option>
-          <option value="PA">PA — Pará</option>
           <option value="CE">CE — Ceará</option>
+          <option value="PA">PA — Pará</option>
           <option value="AP">AP — Amapá</option>
+          <option value="PB">PB — Paraíba</option>
+          <option value="TO">TO — Tocantins</option>
+          <option value="DF">DF — Distrito Federal</option>
         </select>
 
         <p class="label">Organizador / Torneio</p>
@@ -473,6 +484,12 @@
   <!-- botão câmera -->
   <button class="btn-camera" id="btn-camera" onclick="document.getElementById('inp-foto').click()">
     📷 Foto da Ficha
+  </button>
+
+  <!-- botão baixar foto — só aparece quando tem foto -->
+  <button class="btn-camera" id="btn-baixar-foto" onclick="baixarFoto()"
+    style="display:none; border-style:solid; border-color:var(--green-accent); color:var(--green-light); margin-bottom:0;">
+    ⬇️ Baixar Foto para Galeria
   </button>
 
   <div class="btn-row">
@@ -850,6 +867,7 @@ function mostrarResultado() {
   document.getElementById('foto-preview').src = '';
   document.getElementById('btn-camera').className = 'btn-camera';
   document.getElementById('btn-camera').textContent = '📷 Foto da Ficha';
+  document.getElementById('btn-baixar-foto').style.display = 'none';
   showScreen('screen-resultado');
 }
 
@@ -881,6 +899,7 @@ function processarFoto(event) {
       const btn = document.getElementById('btn-camera');
       btn.className = 'btn-camera tem-foto';
       btn.textContent = '📷 Trocar Foto';
+      document.getElementById('btn-baixar-foto').style.display = 'block';
       document.getElementById('inp-foto').value = '';
     };
     img.src = e.target.result;
@@ -918,22 +937,24 @@ function textoCompartilhar(reg) {
   return `🐦 *Torneio de Aves — Canto Livre*\n\nAve: ${reg.nome}\nEspécie: ${reg.especie || '—'}\nTorneio: ${reg.torneio || '—'}\nData: ${reg.data}\nMarcador: ${reg.marcador || '—'}\nPeríodo: ${dl}\nCantos: *${reg.cantos}*`;
 }
 
+function baixarFoto() {
+  if (!state.foto) return;
+  const a = document.createElement('a');
+  a.href = state.foto;
+  a.download = `ficha-${state.nome}-${hoje().replace(/\//g,'-')}.jpg`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  toast('📎 Foto salva! Agora anexe no WhatsApp.');
+}
+
 function compartilharWhatsApp() {
   const reg = { nome:state.nome, especie:state.especie, marcador:state.marcador,
                 torneio:state.torneio, data:hoje(), duracao:state.duracao, cantos:state.cantos };
   if (state.foto) {
-    // Baixa a foto automaticamente antes de abrir o WhatsApp
-    const a = document.createElement('a');
-    a.href = state.foto;
-    a.download = `ficha-${state.nome}-${hoje().replace(/\//g,'-')}.jpg`;
-    a.click();
-    setTimeout(() => {
-      window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(reg)), '_blank');
-      toast('📎 Foto salva! Anexe-a no WhatsApp.');
-    }, 600);
-  } else {
-    window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(reg)), '_blank');
+    toast('📎 Baixe a foto e anexe no WhatsApp!');
   }
+  window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhar(reg)), '_blank');
 }
 
 function novaAve() {
@@ -994,50 +1015,98 @@ function limparTodos() {
 // ── ORGANIZADORES ──
 const ORGANIZADORES = {
   SP: [
-    'BCSO — Clube do Bico Seco',
-    'ASSOSV — Assoc. de São Vicente',
-    'SOPASO — Soc. Paulista de Pássaros',
-    'FEOSP — Fed. Est. Ornitológica de SP',
-    'ABROCOL — Assoc. Brasileira do Coleiro',
-    'ACAU — Assoc. Criadores Alto Uruguai',
-    'CCPCAR — Clube Criadores de Pássaros',
-    'SOIGA — Soc. Ornitológica do Interior',
-    'ALTA MOGIANA — Regional',
-    'APASSP — Assoc. Paulista de Pássaros'
+    'ACPAM — Assoc. Criadores e Passaricultores de Americana',
+    'ACPAR — Assoc. Criadores de Pássaros de Araçatuba e Região',
+    'AOA — Assoc. Ornitológica de Araraquara',
+    'ACPSA — Assoc. Criadores de Pássaros Silvestres de Avaré',
+    'ACACBB — Assoc. Criadores Amadores Curiós e Bicudos Batatais',
+    'CCBCFCP — Clube Criadores de Bicudo e Curió de Fibra do Centro Oeste Paulista — Bauru',
+    'CPAB — Clube dos Passarinheiros Associados de Bebedouro',
+    'ABRAPA — Assoc. Bragantina de Passarinheiros',
+    'ACCP — Assoc. Campineira dos Criadores de Pássaros',
+    'ASAMOC — Assoc. Amadoristas Ornitófilos de Caraguatatuba',
+    'APM — Assoc. Passarinheiros Moratense — Francisco Morato',
+    'AGCP — Assoc. Guaraense dos Criadores de Pássaros',
+    'APH — Assoc. Passarinheiros de Hortolândia',
+    'CUBIVALE — Soc. Valeparaibana dos Criadores de Pássaros — Jacareí',
+    'ACPJ — Assoc. Criadores de Pássaros de Jaú',
+    'CPJ — Clube dos Passarinheiros de Jundiaí',
+    'ASSOLER — Assoc. Ornitológica de Limeira e Região',
+    'ACBCL — Assoc. Criadores de Curiós e Bicudos de Lins',
+    'SOMAR — Assoc. Criadores de Pássaros de Marília e Região',
+    'BCSO — Braz Cubas Sociedade Ornitológica — Mogi das Cruzes',
+    'SOPNO — Soc. Passaricultores de Nova Odessa',
+    'SORO — Assoc. Ornitológica Regional de Ourinhos',
+    'SOPAPI — Soc. Passaricultores de Piracicaba',
+    'CCPG — Clube Criadores de Curió de Praia Grande',
+    'SORPP — Soc. Ornitológica Regional de Presidente Prudente',
+    'ACRPP — Assoc. Criadores de Pássaros de Ribeirão Preto',
+    'ARO — Assoc. Rioclarense dos Ornitólogos',
+    'APSBO — Assoc. Passaricultores de Santa Bárbara d'Oeste',
+    'SERCA — Soc. Esportiva Recreativa dos Criadores de Avinhados — Santa Isabel',
+    'CBSA — Assoc. Criadores de Curiós e Bicudos de Santo André',
+    'CCS — Clube dos Criadores de Curió de Santos',
+    'SOSP — Soc. Ornitológica de São José do Rio Preto',
+    'ACPZS — Assoc. de Passariformes da Zona Sul — São Paulo',
+    'ASP — Assoc. Passarinheiros de São Roque',
+    'ASSOSV — Assoc. Ornitológica de São Vicente',
+    'ACAPIAS — Assoc. Criadores Amadores Pássaros de Sertãozinho',
+    'SOPASO — Soc. Passaricultores de Sorocaba',
+    'ACPT — Assoc. Criadores de Pássaros de Tupã e Região',
+    'ACRIPAVI — Assoc. Criadores de Pássaros de Vinhedo',
+    'FEBRAPS — Federação Brasileira dos Criadores de Pássaros'
   ],
   RJ: [
-    'FEEPAERJ — Fed. Est. de Pássaros do RJ',
-    'SONIT — Soc. Ornitológica Niteroiense',
-    'ACRJ — Assoc. Criadores do RJ',
-    'COBRAP — Conf. Brasileira de Pássaros'
+    'FEEPAERJ — Fed. dos Ecos Passarinheiros do Estado do RJ',
+    'SONIT — Soc. Ornitológica Niteroiense'
   ],
   PR: [
-    'FECRIPAR — Fed. Criadores de Pássaros PR',
-    'ACPFAZ — Assoc. Criadores Fazenda Rio Grande',
-    'AOPA — Assoc. Ornitológica do Paraná'
+    'FECRIPAR — Fed. Criadores de Pássaros do Estado do Paraná'
   ],
   PE: [
-    'AOPE — Assoc. Ornitológica de Pernambuco',
-    'FEOPPE — Fed. Ornitológica de PE'
+    'AOPE — Assoc. Ornitológica de Pernambuco'
   ],
   CE: [
-    'AOCCE — Assoc. Ornitológica do Ceará',
-    'COBRAP — Conf. Brasileira de Pássaros'
+    'AOCE — Assoc. Ornitológica do Ceará'
   ],
   PA: [
-    'AOPA — Assoc. Ornitológica do Pará',
-    'FEOPA — Fed. Ornitológica do Pará'
+    'CCPP — Clube dos Criadores de Pássaros do Pará'
   ],
   AP: [
-    'AMAP — Assoc. Ornitológica do Amapá'
+    'ACPCA-AP — Assoc. Criadores de Pássaros Canoros e Avinhados do Amapá'
+  ],
+  BA: [
+    'APCB — Assoc. Praia Clássico da Bahia'
+  ],
+  MG: [
+    'FEOMG — Fed. Ornitológica de Minas Gerais'
+  ],
+  RS: [
+    'FEGAPAN — Fed. Gaúcha dos Criadores de Pássaros Nativos Brasileiros'
+  ],
+  SC: [
+    'FOESC — Fed. Ornitológica do Estado de Santa Catarina'
   ],
   ES: [
-    'AOES — Assoc. Ornitológica do ES',
-    'FEOES — Fed. Ornitológica do ES'
+    'FEOES — Fed. Ornitológica do Estado do Espírito Santo'
+  ],
+  GO: [
+    'FOGO — Fed. Ornitológica do Estado de Goiás'
+  ],
+  MS: [
+    'FECRIPAS — Fed. dos Criadores de Pássaros de Mato Grosso do Sul'
+  ],
+  MT: [
+    'LIGAMAT — Liga dos Clubes de Criadores de Pássaros do Mato Grosso'
   ],
   DF: [
-    'AODF — Assoc. Ornitológica do DF',
-    'COBRAP — Conf. Brasileira de Pássaros'
+    'ACPB — Assoc. dos Criadores de Pássaros de Brasília'
+  ],
+  PB: [
+    'COPB — Clube Ornitológico da Paraíba'
+  ],
+  TO: [
+    'AOTO — Assoc. Ornitológica do Tocantins'
   ]
 };
 
