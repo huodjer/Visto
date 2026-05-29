@@ -1133,11 +1133,15 @@ function salvarOrganizadorExtra(uf, nome) {
 function preencherSugestoesTorneio(lista) {
   const box = document.getElementById('sugestoes-torneio');
   if (!lista.length) { box.style.display = 'none'; return; }
-  box.innerHTML = lista.map(t =>
-    `<div class="sug-item" onmousedown="selecionarTorneio('${t.replace(/'/g,"\'")}')">
-      🏆 ${t}
-    </div>`
-  ).join('');
+  box.innerHTML = '';
+  lista.forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'sug-item';
+    div.textContent = '🏆 ' + t;
+    div.addEventListener('mousedown', (e) => { e.preventDefault(); selecionarTorneio(t); });
+    div.addEventListener('touchstart', (e) => { e.preventDefault(); selecionarTorneio(t); });
+    box.appendChild(div);
+  });
   box.style.display = 'block';
 }
 
